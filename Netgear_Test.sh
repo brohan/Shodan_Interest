@@ -10,4 +10,14 @@
 #       fi
 #done < $1
 # Hello71 on IRC bash line:
-while read line; do if curl -u admin:password $line/index.htm | grep -qi netgear; then echo $line >> Netgear_Default_Auth.txt; fi; done < $1
+
+# One-liner: while read line; do if curl -u admin:password $line/index.htm | grep -qi netgear; then echo $line >> Netgear_Default_Auth.txt; fi; done < $1
+
+counter=1
+while read line; do 
+    echo $counter
+    let "counter++"
+    if curl -u admin:password $line/index.htm | grep -qi netgear; then 
+        echo $line >> Netgear_Default_Auth.txt
+    fi
+done < $1
